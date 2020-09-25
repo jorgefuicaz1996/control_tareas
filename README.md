@@ -1,2 +1,1 @@
-# control_tareas
-Sistema de Control de Tareas "PowerTask"
+# Sistema de Control de Tareas "PowerTask"
