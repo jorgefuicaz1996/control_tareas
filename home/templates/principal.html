@@ -1,7 +1,16 @@
 {% extends 'template.html' %}
 {% block imports %}
+
 {% endblock %}
 
 {% block content %}
 	<p>Pantalla principal</p>
+
+	{% if user.is_authenticated %}
+	{% if user.is_staff %}
+	<p>Vista para rol administrador</p>
+	{% else %}
+	<p>Vista para rol funcionario</p>
+	{% endif %}
+	{% endif%}
 {% endblock %}
