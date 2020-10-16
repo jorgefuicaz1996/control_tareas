@@ -6,16 +6,31 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, user-scalable=no">
 	<title>{{ title }} | PowerTask</title>
 	<link rel="shortcut icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+	<link href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet"> 
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
 	{% block imports %}{% endblock %}
 </head>
-<body>
-	{% if user.is_authenticated %}
-	<p>Bienvenido</p>
-	<a href="{% url 'log-out' %}">Cerrar sesión</a>
-	{% else %}
-	<a href="{% url 'log-in' %}">Iniciar sesión</a>
-	{% endif %}
 
-	{% block content %}{% endblock %}
+<body>
+	<header>
+		<div class="banner">
+			<h1>Power Task</h1>
+		</div>
+		<nav>	
+			<a href="{% url 'principal' %}">Home</a>
+			{% if user.is_authenticated %}
+			<a href="{% url 'log-out' %}">Cerrar sesión</a>
+			{% else %}
+			<a href="{% url 'log-in' %}">Iniciar sesión</a>
+			{% endif %}
+		</nav>
+	</header>
+	<div id="main">
+		{% block content %}{% endblock %}
+	</div>
+
+	<footer>
+		<h3>Desarrollado por Process S.A. 2020 ©</h3>
+	</footer>
 </body>
 </html>

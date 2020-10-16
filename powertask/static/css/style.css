@@ -1,0 +1,65 @@
+body{
+    font-family: 'Arvo', serif;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+/*header*/
+header{
+    display: flex;
+    flex-direction: column;
+}
+.banner{
+    background: url("/static/images/banner.jpg");
+    text-align: center;
+    color:white;
+    width: 100%;
+}
+.banner h1{
+    padding: 4%;
+}
+nav{
+    background: #407A78;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    text-align: center;
+    width: 100%;
+}
+nav a{
+    color:white;
+    margin-right: 10px;
+    text-decoration: none;
+}
+nav a:hover{
+    border-bottom: 1px solid white;
+}
+/*fin header*/
+/*footer*/
+footer{
+    background: #254B52;
+    text-align: center;
+    padding-top: 3%;
+    padding-bottom: 3%;
+}
+footer h3{
+    color:white;
+    font-weight: 500;
+}
+/*fin footer*/
+/*main*/
+#main{
+    margin: 3%;
+    padding-bottom: 15%;
+    text-align: center;
+}
+#main #login-form{
+    display: inline-block;
+}
+#main #login-form table input{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+#main #login-form input{
+    margin:30px;
+    font-family: 'Arvo', serif;
+}
