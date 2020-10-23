@@ -1,0 +1,39 @@
+{% extends 'template.html' %}
+{% load static %}
+{% block imports %}
+
+{% endblock %}
+{% block content %}
+<div id="panel">
+	<div id="Main_panel">
+		<div class="Titulo">
+			<h2>Mis Tareas</h2>
+		</div>
+		<div id="crear-tarea" align="center">
+			<table>
+				<tr>
+					<th>Descripción tarea</th>
+					<th>Fecha inicio</th>
+					<th>Fecha plazo</th>
+					<th>Estado</th>
+					<th>Acciones</th>
+				</tr>
+				{% for t in tareas %}
+				<tr>
+					<td>{{ t.descripcion }}</td>
+					<td>{{ t.fecha_inicio }}</td>
+					<td>{{ t.fecha_plazo }}</td>
+					<td>{{ t.estado }}</td>
+					<td><a href="#">Reportar problema</a></td>
+				</tr>
+				{% empty %}
+				<tr>
+					<td colspan="5">No hay tareas por asignar</td>
+				</tr>
+				{% endfor %}
+			</table>
+		</div>
+		<a href="{% url 'panel' %}">Volver</a>
+	</div>
+</div>
+{% endblock %}

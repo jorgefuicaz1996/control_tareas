@@ -1,0 +1,34 @@
+{% extends 'template.html' %}
+{% load static %}
+{% block imports %}
+
+{% endblock %}
+{% block content %}
+<div id="panel">
+	<div id="Main_panel">
+		<div class="Titulo">
+			<h2>Asignar responsable</h2>
+			<h3>{{ tarea.descripcion }}</h3>
+		</div>
+		<div id="crear-tarea" align="center">
+			<table>
+				<tr>
+					<th>Funcionario</th>
+					<th>Acciones</th>
+				</tr>
+				{% for f in funcionarios %}
+				<tr>
+					<td>{{ f }}</td>
+					<td><a href="{% url 'asignar-responsable' tarea.id_tarea f.id_funcionario %}">Asignar responsable</a></td>
+				</tr>
+				{% empty %}
+				<tr>
+					<td colspan="5">No hay funcionarios disponibles por asignar</td>
+				</tr>
+				{% endfor %}
+			</table>
+		</div>
+		<a href="{% url 'menu-asignar-tarea' %}">Volver</a>
+	</div>
+</div>
+{% endblock %}
