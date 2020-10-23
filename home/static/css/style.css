@@ -1,7 +1,0 @@
-/*PANEL*/
-.contenedor{
-    display: flex;
-}
-.contenedor .izquierda,.contenedor .derecha{
-    width: 50%;
-}
