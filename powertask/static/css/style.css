@@ -48,7 +48,6 @@ footer h3{
 /*fin footer*/
 /*main*/
 #main{
-    padding-bottom: 15%;
     text-align: center;
 }
 #main #login-form{
@@ -62,9 +61,20 @@ footer h3{
     margin:30px;
     font-family: 'Arvo', serif;
 }
+.exterior{
+    display: flex;
+    background:url("/static/images/home1.jpg")no-repeat;
+    background-size: cover;
+}
+.interior{
+    padding:100px;
+}
 /*PANEL*/
 #panel #main{
     margin:0 !important;
+}
+#Main_panel{
+    padding-bottom: 15%;
 }
 .Titulo{
     display: flex;
