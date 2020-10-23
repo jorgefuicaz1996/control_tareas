@@ -15,5 +15,6 @@ class CrearTareaForm(forms.Form):
 	duracion_dias = forms.IntegerField(
 		label = 'Duración en días',
 		widget = forms.NumberInput(attrs = {'id': 'duracion_dias'}),
-		min_value = 1
+		min_value = 1,
+		initial = 1
 	)
