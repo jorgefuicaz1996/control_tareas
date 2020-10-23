@@ -9,7 +9,7 @@
 		<div class="Titulo">
 			<h2>Creación de tareas</h2>
 		</div>
-		<div id="crear-tarea">
+		<div id="crear-tarea" align="center">
 			<form id="crear-tarea-form" method="POST">
 				{% csrf_token %}
 				<table>
@@ -22,6 +22,7 @@
 				<input type="submit" value="Crear tarea">
 			</form>
 		</div>
+		<a href="{% url 'panel' %}">Volver</a>
 	</div>
 </div>
 {% endblock %}
