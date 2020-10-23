@@ -92,9 +92,20 @@ class Tarea(models.Model):
 	fecha_plazo = models.DateField()
 	duracion_dias = models.IntegerField()
 	estado = models.ForeignKey(EstadoTarea, on_delete = models.DO_NOTHING)
+	responsables = models.ManyToManyField(Funcionario, through = 'ResponsableTarea')
 
 	def __str__(self):
 		return self.descripcion
 
 	class Meta:
 		db_table = 'tarea'
+
+class ResponsableTarea(models.Model):
+	funcionario = models.ForeignKey(Funcionario, on_delete = models.DO_NOTHING)
+	tarea = models.ForeignKey(Tarea, on_delete = models.DO_NOTHING)
+
+	class Meta:
+		db_table = 'responsable_tarea'
+		constraints = [
+			models.UniqueConstraint(name = 'funcionario_tarea_UN', fields = ('funcionario', 'tarea'))
+		]
