@@ -1,12 +1,19 @@
 from django import forms
 from datetime import datetime
 
-class Crear_tareaForm(forms.Form):
-	nombre = forms.CharField(
-		label = 'Nombre de tarea',
-		widget = forms.TextInput(attrs = {'id': 'nombre', 'placeholder': 'Ingrese el nombre de la tarea'})
+class CrearTareaForm(forms.Form):
+	descripcion = forms.CharField(
+		label = 'Descripción',
+		widget = forms.TextInput(attrs = {'id': 'descripcion', 'placeholder': 'Ingrese descripción'})
 	)
+
 	fecha_inicio = forms.DateField(
-		label = 'Fecha de inicio de la tarea',
-		widget = forms.SelectDateWidget(years=range(datetime.now().year,datetime.now().year+10))
+		label = 'Fecha inicio',
+		widget = forms.SelectDateWidget(years = range(datetime.now().year, datetime.now().year + 10))
+	)
+
+	duracion_dias = forms.IntegerField(
+		label = 'Duración en días',
+		widget = forms.NumberInput(attrs = {'id': 'duracion_dias'}),
+		min_value = 1
 	)
