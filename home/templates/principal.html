@@ -17,12 +17,4 @@
 	
 		</div>
 	</div>
-
-	{% if user.is_authenticated %}
-	{% if user.is_staff %}
-	<p>Vista para rol administrador</p>
-	{% else %}
-	<p>Vista para rol funcionario</p>
-	{% endif %}
-	{% endif%}
 {% endblock %}
