@@ -19,7 +19,7 @@ class LoginView(View):
 			user = authenticate(username = data.get('username'), password = data.get('password'))
 			if user:
 				login(request, user)
-				return redirect('/')
+				return redirect('/panel')
 			self.context['fail'] = True
 		return render(request, self.template_name, self.context)
 

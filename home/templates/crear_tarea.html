@@ -1,0 +1,29 @@
+{% extends 'template.html' %}
+{% load static %}
+{% block imports %}
+
+{% endblock %}
+<div id="panel">
+    {% block content %}
+    <div id="Main_panel">
+        <div class="Titulo">
+            <h2>Bienvenido al panel de usuario</h2>
+            <h3>Juan Torres Funcionario</h3>
+        </div>
+        <div id="crear-tarea">
+            <h2>Crear tarea</h2>
+            <form id="login-form" method="POST">
+                {% csrf_token %}
+                {% if fail %}<p>Las credenciales que ingresó no son válidas.</p>{% endif %}
+                <table>
+                    {% for field in form %}<tr>
+                        <th>{{ field.label_tag }}</th>
+                        <td>{{ field }}</td>
+                        <td>{{ field.errors }}</td>
+                    </tr>{% endfor %}
+                </table>
+                <input type="submit" value="Crear tarea">
+            </form>
+        </div>
+</div>
+{% endblock %}

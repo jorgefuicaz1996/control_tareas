@@ -16,7 +16,7 @@
 		<div class="banner">
 			<h1>Power Task</h1>
 		</div>
-		<nav>	
+		<nav id="menu-header">	
 			<a href="{% url 'principal' %}">Home</a>
 			{% if user.is_authenticated %}
 			<a href="{% url 'log-out' %}">Cerrar sesión</a>

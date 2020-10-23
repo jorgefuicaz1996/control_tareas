@@ -18,19 +18,19 @@ header{
 .banner h1{
     padding: 4%;
 }
-nav{
+#menu-header{
     background: #407A78;
     padding-top: 30px;
     padding-bottom: 30px;
     text-align: center;
     width: 100%;
 }
-nav a{
+#menu-header a{
     color:white;
     margin-right: 10px;
     text-decoration: none;
 }
-nav a:hover{
+#menu-header a:hover{
     border-bottom: 1px solid white;
 }
 /*fin header*/
@@ -48,7 +48,6 @@ footer h3{
 /*fin footer*/
 /*main*/
 #main{
-    margin: 3%;
     padding-bottom: 15%;
     text-align: center;
 }
@@ -56,10 +55,66 @@ footer h3{
     display: inline-block;
 }
 #main #login-form table input{
-    margin-top: 5px;
+    margin-top: 15px;
     margin-bottom: 5px;
 }
 #main #login-form input{
     margin:30px;
     font-family: 'Arvo', serif;
+}
+/*PANEL*/
+#panel #main{
+    margin:0 !important;
+}
+.Titulo{
+    display: flex;
+    flex-direction: column;
+    background-color: #F0EBE8;
+}
+.contenedor{
+    display: flex;
+}
+.contenedor .izquierda,.contenedor .derecha{
+    width: 50%;
+    margin-top: 35px;
+}
+
+/*izquierda*/
+#menu-panel{
+    display: grid;
+    text-align: center;
+}
+#menu-panel a{
+    background:  #254B52;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    text-decoration: none;
+    color:white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+#menu-panel a:hover{
+    background: #7B7670;
+}
+/*derecha*/
+.contenedor .derecha img{
+    border-radius: 100px;
+    border: 1px solid grey;
+}
+.contenedor .derecha a{
+    background:  #254B52;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    text-decoration: none;
+    color:white;
+    padding:10px;
+}
+.contenedor .derecha a:hover{
+    background: #7B7670;
+}
+/*crear tarea*/
+#crear-tarea{
+   
 }
