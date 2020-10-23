@@ -3,29 +3,29 @@
 {% block imports %}
 
 {% endblock %}
+
+{% block content %}
 <div id="panel">
-    {% block content %}
-    <div id="Main_panel">
-        <div class="Titulo">
-            <h2>Bienvenido al panel de usuario</h2>
-            <h3>Juan Torres Funcionario</h3>
-        </div>
-        <div class="contenedor">
-            <div class="izquierda">
-                    <nav id="menu-panel">
-                        <a href="">Mis tareas</a>
-                        <a href="{% url 'crear-tarea' %}">Crear Tarea</a>
-                    </nav>                        
-            </div>
-            <div class="derecha">
-                    <img src="/static/images/default-profile.png" alt="" width="150px" height="150px">
-                    <h3>Email: jua.torres@gmail.com</h3>
-                    <h3>Telefono: +56952154788</h3>
-                    <h3>Contraseña: ********</h3>
-                    <a href="">Editar perfil</a>
-            </div>
-        </div>
-    </div>
-			
-{% endblock %}
+	<div id="Main_panel">
+		<div class="Titulo">
+			<h2>Bienvenido al panel de usuario</h2>
+			<h3>{{ funcionario.nombres }} {{ funcionario.ap_paterno }} {{ funcionario.ap_materno }} - Funcionario</h3>
+		</div>
+		<div class="contenedor">
+			<div class="izquierda">
+				<nav id="menu-panel">
+					<a href="{% url 'mis-tareas' %}">Mis tareas</a>
+					<a href="{% url 'crear-tarea' %}">Crear Tarea</a>
+					<a href="{% url 'menu-asignar-tarea' %}">Asignar Tarea</a>
+				</nav>
+			</div>
+			<div class="derecha">
+				<img src="/static/images/default-profile.png" alt="" width="150px" height="150px">
+				<h3>Email: {{ funcionario.email }}</h3>
+				<h3>Teléfono móvil: {{ funcionario.telefono_movil }}</h3>
+				<a href="">Editar perfil</a>
+			</div>
+		</div>
+	</div>
 </div>
+{% endblock %}
