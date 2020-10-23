@@ -81,7 +81,15 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': 'db.sqlite3'
-    }
+    },
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.oracle',
+    #     'NAME': 'XE',
+    #     'USER': 'powertask',
+    #     'PASSWORD': 'powertask',
+    #     'HOST': '192.168.17.21',
+    #     'PORT': '1521',
+    # }
 }
 
 
