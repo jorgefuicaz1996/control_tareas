@@ -103,9 +103,10 @@ class Tarea(models.Model):
 class ResponsableTarea(models.Model):
 	funcionario = models.ForeignKey(Funcionario, on_delete = models.DO_NOTHING)
 	tarea = models.ForeignKey(Tarea, on_delete = models.DO_NOTHING)
+	plazo_dias = models.IntegerField()
 
 	class Meta:
 		db_table = 'responsable_tarea'
 		constraints = [
-			models.UniqueConstraint( fields = ['funcionario', 'tarea'],name = 'funcionario_tarea_UN')
+			models.UniqueConstraint(name = 'funcionario_tarea_UN', fields = ['funcionario', 'tarea'])
 		]
