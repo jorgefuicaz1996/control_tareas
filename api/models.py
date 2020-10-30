@@ -107,5 +107,5 @@ class ResponsableTarea(models.Model):
 	class Meta:
 		db_table = 'responsable_tarea'
 		constraints = [
-			models.UniqueConstraint(name = 'funcionario_tarea_UN', fields = ('funcionario', 'tarea'))
+			models.UniqueConstraint( fields = ['funcionario', 'tarea'],name = 'funcionario_tarea_UN')
 		]
