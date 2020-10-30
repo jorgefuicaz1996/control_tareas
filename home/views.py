@@ -61,20 +61,23 @@ class ListaResponsableView(View):
 	def get(self, request, tarea):
 		tarea = Tarea.objects.get(pk = tarea)
 		funcionarios = Funcionario.objects.exclude(pk__in = ResponsableTarea.objects.filter(tarea = tarea).values('funcionario'))
+		form = AsignarResponsableForm()
 		self.context['tarea'] = tarea
 		self.context['funcionarios'] = funcionarios
+		self.context['form'] = form
 		return render(request, self.template_name, self.context)
 
 def asignar_responsable(request, tarea, responsable):
-	ResponsableTarea.objects.create(
-		funcionario = Funcionario.objects.get(pk = responsable),
-		tarea = Tarea.objects.get(pk = tarea)
-	)
-	tarea_obj = Tarea.objects.get(pk = tarea)
-	if tarea_obj.estado != 'Asignada':
-		tarea_obj.estado = EstadoTarea.objects.get(descripcion = 'Asignada')
-		tarea_obj.save()
-	return redirect('lista-responsable', tarea)
+	form = AsignarResponsableForm(request.POST)
+	if form.is_valid():
+		data = form.cleaned_data
+		funcionario_obj = Funcionario.objects.get(pk = responsable)
+		tarea_obj = Tarea.objects.get(pk = tarea)
+		ResponsableTarea.objects.create(funcionario = funcionario_obj, tarea = tarea_obj, plazo_dias = data.get('plazo_dias'))
+		if tarea_obj.estado != 'Asignada':
+			tarea_obj.estado = EstadoTarea.objects.get(descripcion = 'Asignada')
+			tarea_obj.save()
+		return redirect('lista-responsable', tarea)
 
 class MisTareasView(View):
 	template_name = 'mis_tareas.html'

@@ -18,3 +18,11 @@ class CrearTareaForm(forms.Form):
 		min_value = 1,
 		initial = 1
 	)
+
+class AsignarResponsableForm(forms.Form):
+	plazo_dias = forms.IntegerField(
+		label = 'Plazo en días',
+		widget = forms.NumberInput(),
+		min_value = 1,
+		initial = 1
+	)

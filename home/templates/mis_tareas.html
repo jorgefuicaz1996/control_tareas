@@ -15,6 +15,7 @@
 					<th>Descripción tarea</th>
 					<th>Fecha inicio</th>
 					<th>Fecha plazo</th>
+					<th>Días asignado</th>
 					<th>Estado</th>
 					<th>Acciones</th>
 				</tr>
@@ -23,6 +24,7 @@
 					<td>{{ t.descripcion }}</td>
 					<td>{{ t.fecha_inicio }}</td>
 					<td>{{ t.fecha_plazo }}</td>
+					<td>{{ t.responsabletarea_set.first.plazo_dias }}</td>
 					<td>{{ t.estado }}</td>
 					<td><a href="#">Reportar problema</a></td>
 				</tr>
