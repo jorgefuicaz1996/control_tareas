@@ -78,18 +78,18 @@ WSGI_APPLICATION = 'powertask.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'db.sqlite3'
-    },
     # 'default': {
-    #     'ENGINE': 'django.db.backends.oracle',
-    #     'NAME': 'XE',
-    #     'USER': 'powertask',
-    #     'PASSWORD': 'powertask',
-    #     'HOST': '192.168.17.21',
-    #     'PORT': '1521',
-    # }
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': 'db.sqlite3'
+    # },
+    'default': {
+        'ENGINE': 'django.db.backends.oracle',
+        'NAME': 'XE',
+        'USER': 'powertask',
+        'PASSWORD': 'powertask',
+        'HOST': '192.168.17.21',
+        'PORT': '1521',
+    }
 }
 
 
