@@ -18,6 +18,7 @@
 					<th>Días asignado</th>
 					<th>Estado</th>
 					<th>Acciones</th>
+					<th>Semáforo</th>
 				</tr>
 				{% for t in tareas %}
 				<tr>
@@ -26,6 +27,11 @@
 					<td>{{ t.fecha_plazo }}</td>
 					<td>{{ t.responsabletarea_set.first.plazo_dias }}</td>
 					<td>{{ t.estado }}</td>
+					<td><div class="semaforo">
+						<img class="rojo" src="{% static 'images/rojo.png' %}" alt="">
+						<img class="amarillo" src="{% static 'images/amarillo.png' %}" alt="">
+						<img class="verde" src="{% static 'images/verde.png' %}" alt="">
+					</div>></td>
 					<td><a href="#">Reportar problema</a></td>
 				</tr>
 				{% empty %}

@@ -124,7 +124,36 @@ footer h3{
 .contenedor .derecha a:hover{
     background: #7B7670;
 }
-/*crear tarea*/
-#crear-tarea{
-   
+/*MIS TAREAS*/
+.verde,.amarillo,.rojo{
+    display: none;
+    width: 50px;
+}
+.head{
+    background-color: #393939;
+}
+.head th{
+    color:#00ad5f;
+    padding:15px;
+    text-transform: uppercase;
+}
+.body{
+    background-color: #222;
+    text-align: center;
+    padding: 5px;
+    color:gray;
+    text-transform: capitalize;
+}
+.body td{
+    padding: 15px;
+}
+.body td:hover{
+    background-color: #3D3D3D;
+    transition: 0.8s;
+}
+.body a{
+    color:gray;
+}
+table{
+    border-radius: 1em;
 }
