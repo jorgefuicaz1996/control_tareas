@@ -36,6 +36,7 @@ class Crear_tareaView(LoginRequiredMixin, View):
 		if self.form.is_valid():
 			data = self.form.cleaned_data
 			Tarea.objects.create(
+				nombre = data.get('nombre'),
 				descripcion = data.get('descripcion'),
 				fecha_inicio = data.get('fecha_inicio'),
 				fecha_plazo = data.get('fecha_inicio') + timedelta(days = data.get('duracion_dias')),

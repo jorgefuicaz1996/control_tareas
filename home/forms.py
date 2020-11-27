@@ -2,6 +2,11 @@ from django import forms
 from datetime import datetime
 
 class CrearTareaForm(forms.Form):
+	nombre = forms.CharField(
+		label = 'Nombre',
+		widget = forms.TextInput(attrs = {'id': 'nombre', 'placeholder': 'Ingrese nombre'})
+	)
+
 	descripcion = forms.CharField(
 		label = 'Descripción',
 		widget = forms.TextInput(attrs = {'id': 'descripcion', 'placeholder': 'Ingrese descripción'})
