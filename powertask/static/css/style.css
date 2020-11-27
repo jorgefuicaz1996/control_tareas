@@ -63,11 +63,18 @@ footer h3{
 }
 .exterior{
     display: flex;
-    background:url("/static/images/home1.jpg")no-repeat;
     background-size: cover;
 }
 .interior{
+    display: flex;
     padding:100px;
+}
+.izquierda-home{
+    text-align: right;
+    margin-right: 3%;
+    width: 50%;
+    border-right: 4px solid #254B52;
+    padding-right: 3%;
 }
 /*PANEL*/
 #panel #main{

@@ -11,7 +11,7 @@
 		</div>
 		<div id="crear-tarea" align="center">
 			<table>
-				<tr>
+				<tr class="head">
 					<th>Descripción tarea</th>
 					<th>Fecha inicio</th>
 					<th>Fecha plazo</th>
@@ -21,7 +21,7 @@
 					<th>Semáforo</th>
 				</tr>
 				{% for t in tareas %}
-				<tr>
+				<tr class="body">
 					<td>{{ t.descripcion }}</td>
 					<td>{{ t.fecha_inicio }}</td>
 					<td>{{ t.fecha_plazo }}</td>
