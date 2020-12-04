@@ -144,7 +144,6 @@ if settings.DB_ORACLE:
 		funcionario = models.ForeignKey(Funcionario, on_delete = models.CASCADE, db_column = 'id_funcionario')
 		tarea = models.ForeignKey(Tarea, on_delete = models.CASCADE, db_column = 'id_tarea')
 		justificativo = models.CharField(max_length = 50, null = True, blank = True)
-		plazo_dias = models.IntegerField()
 
 		class Meta:
 			db_table = 'responsable_tarea'
@@ -295,7 +294,6 @@ else:
 		funcionario = models.ForeignKey(Funcionario, on_delete = models.CASCADE, db_column = 'id_funcionario')
 		tarea = models.ForeignKey(Tarea, on_delete = models.CASCADE, db_column = 'id_tarea')
 		justificativo = models.CharField(max_length = 50, null = True, blank = True)
-		plazo_dias = models.IntegerField()
 
 		class Meta:
 			db_table = 'responsable_tarea'
