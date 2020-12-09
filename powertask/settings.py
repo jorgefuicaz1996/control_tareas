@@ -87,7 +87,7 @@ if DB_ORACLE:
 			'NAME': 'XE',
 			'USER': 'powertask',
 			'PASSWORD': 'powertask',
-			'HOST': '192.168.17.21',
+			'HOST': '200.111.90.172',
 			'PORT': '1521',
 		},
 	}
