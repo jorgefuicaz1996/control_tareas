@@ -157,8 +157,8 @@ if settings.DB_ORACLE:
 		descripcion = models.CharField(max_length = 500)
 		estado = models.CharField(max_length = 15)
 		solucion_planteada = models.CharField(max_length = 500),
-		funcionario = models.ForeignKey(Funcionario, on_delete = models.CASCADE)
-		tarea = models.ForeignKey(Tarea, on_delete = models.CASCADE)
+		funcionario = models.ForeignKey(Funcionario, on_delete = models.CASCADE, db_column = 'id_funcionario')
+		tarea = models.ForeignKey(Tarea, on_delete = models.CASCADE, db_column = 'id_tarea')
 
 		class Meta:
 			db_table = 'problema'
@@ -306,8 +306,8 @@ else:
 		descripcion = models.CharField(max_length = 500)
 		estado = models.CharField(max_length = 15)
 		solucion_planteada = models.CharField(max_length = 500),
-		funcionario = models.ForeignKey(Funcionario, on_delete = models.CASCADE)
-		tarea = models.ForeignKey(Tarea, on_delete = models.CASCADE)
+		funcionario = models.ForeignKey(Funcionario, on_delete = models.CASCADE, db_column = 'id_funcionario')
+		tarea = models.ForeignKey(Tarea, on_delete = models.CASCADE, db_column = 'id_tarea')
 
 		class Meta:
 			db_table = 'problema'
