@@ -1,0 +1,24 @@
+{% extends 'template.html' %}
+{% block content %}
+<div id="panel">
+	<div id="Main_panel">
+		<div class="Titulo">
+			<h2>Reportar problema</h2>
+		</div>
+		<div id="reportar-problema" align="center">
+			<form id="reportar-problema-form" method="POST">
+				{% csrf_token %}
+				<table>
+					{% for field in form %}<tr>
+						<th>{{ field.label_tag }}</th>
+						<td>{{ field }}</td>
+						<td>{{ field.errors }}</td>
+					</tr>{% endfor %}
+				</table>
+				<input type="submit" value="Enviar">
+			</form>
+		</div>
+		<a href="{% url 'panel' %}">Volver</a>
+	</div>
+</div>
+{% endblock %}
