@@ -117,9 +117,12 @@ class ReportarProblemaView(LoginRequiredMixin, View):
 		form = self.form(request.POST)
 		if form.is_valid():
 			data = form.cleaned_data
+			funcionario_obj = Funcionario.objects.get(usuario = request.user)
 			tarea_obj = Tarea.objects.get(pk = tarea)
 			Problema.objects.create(
 				descripcion = data.get('descripcion'),
+				estado = 'INGRESADO',
+				funcionario = funcionario_obj,
 				tarea = tarea_obj)
 			return redirect('mis-tareas')
 		return render(request, self.template_name, self.context)
