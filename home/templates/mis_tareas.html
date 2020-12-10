@@ -37,7 +37,7 @@
 						<img class="verde" src="{% static 'images/verde.png' %}" style="display: block">
 						{% endif %}
 					</div></td>
-					<td><a href="#">Reportar problema</a></td>
+					<td><a href="{% url 'reportar-problema' tarea.id_tarea %}">Reportar problema</a></td>
 				</tr>
 				{% endwith %}
 				{% empty %}
