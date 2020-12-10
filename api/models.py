@@ -129,8 +129,8 @@ if settings.DB_ORACLE:
 		fecha_inicio = models.DateField()
 		fecha_termino = models.DateField(null = True, blank = True)
 		fecha_plazo = models.DateField()
-		duracion_dias = models.IntegerField()
 		estado = models.ForeignKey(EstadoTarea, on_delete = models.CASCADE, db_column = 'id_estado')
+		funcion = models.ForeignKey(Funcion, on_delete = models.CASCADE, db_column = 'id_funcion')
 		responsables = models.ManyToManyField(Funcionario, through = 'ResponsableTarea')
 
 		class Meta:
@@ -280,8 +280,8 @@ else:
 		fecha_inicio = models.DateField()
 		fecha_termino = models.DateField(null = True, blank = True)
 		fecha_plazo = models.DateField()
-		duracion_dias = models.IntegerField()
 		estado = models.ForeignKey(EstadoTarea, on_delete = models.CASCADE, db_column = 'id_estado')
+		funcion = models.ForeignKey(Funcion, on_delete = models.CASCADE, db_column = 'id_funcion')
 		responsables = models.ManyToManyField(Funcionario, through = 'ResponsableTarea')
 
 		class Meta:
