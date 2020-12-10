@@ -14,18 +14,12 @@
 			<table>
 				<tr>
 					<th>Funcionario</th>
-					<th>Plazo en días</th>
+					<th>Acciones</th>
 				</tr>
 				{% for f in funcionarios %}
 				<tr>
 					<td>{{ f }}</td>
-					<td>
-						<form action="{% url 'asignar-responsable' tarea.id_tarea f.id_funcionario %}" method="POST">
-							{% csrf_token %}
-							{{ form.plazo_dias }}
-							<input type="submit" value="Asignar">
-						</form>
-					</td>
+					<td><a href="{% url 'asignar-responsable' tarea.id_tarea f.id_funcionario %}">Asignar</a></td>
 				</tr>
 				{% empty %}
 				<tr>

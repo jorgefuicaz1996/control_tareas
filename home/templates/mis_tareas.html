@@ -15,25 +15,31 @@
 					<th>Descripción tarea</th>
 					<th>Fecha inicio</th>
 					<th>Fecha plazo</th>
-					<th>Días asignado</th>
+					<th>Días restantes</th>
 					<th>Estado</th>
-					<th>Acciones</th>
 					<th>Semáforo</th>
+					<th>Acciones</th>
 				</tr>
-				{% for t in tareas %}
+				{% for item in tareas.values %}
+				{% with tarea=item.tarea %}
 				<tr class="body">
-					<td>{{ t.descripcion }}</td>
-					<td>{{ t.fecha_inicio }}</td>
-					<td>{{ t.fecha_plazo }}</td>
-					<td>{{ t.responsabletarea_set.first.plazo_dias }}</td>
-					<td>{{ t.estado }}</td>
+					<td>{{ tarea.descripcion }}</td>
+					<td>{{ tarea.fecha_inicio }}</td>
+					<td>{{ tarea.fecha_plazo }}</td>
+					<td>{{ item.dias }}</td>
+					<td>{{ tarea.estado }}</td>
 					<td><div class="semaforo">
-						<img class="rojo" src="{% static 'images/rojo.png' %}" alt="">
-						<img class="amarillo" src="{% static 'images/amarillo.png' %}" alt="">
-						<img class="verde" src="{% static 'images/verde.png' %}" alt="">
-					</div>></td>
+						{% if item.semaforo == 1 %}
+						<img class="rojo" src="{% static 'images/rojo.png' %}" style="display: block">
+						{% elif item.semaforo == 2 %}
+						<img class="amarillo" src="{% static 'images/amarillo.png' %}" style="display: block">
+						{% elif item.semaforo == 3 %}
+						<img class="verde" src="{% static 'images/verde.png' %}" style="display: block">
+						{% endif %}
+					</div></td>
 					<td><a href="#">Reportar problema</a></td>
 				</tr>
+				{% endwith %}
 				{% empty %}
 				<tr>
 					<td colspan="5">No hay tareas por asignar</td>
