@@ -10,14 +10,14 @@
 			<h2>Listado de tareas</h2>
 		</div>
 		<div id="crear-tarea" align="center">
-			<table>
-				<tr>
+			<table cellspacing="0" cellpadding="0">
+				<tr class="head">
 					<th>Tarea</th>
 					<th>Estado</th>
 					<th>Acciones</th>
 				</tr>
 				{% for t in tareas %}
-				<tr>
+				<tr class="body">
 					<td>{{ t.nombre }}</td>
 					<td>{{ t.estado }}</td>
 					<td><a href="{% url 'modificar-tarea' t.pk %}">Modificar</a></td>

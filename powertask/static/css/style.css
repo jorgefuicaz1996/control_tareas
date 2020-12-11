@@ -40,6 +40,8 @@ footer{
     text-align: center;
     padding-top: 3%;
     padding-bottom: 3%;
+    position: absolute;
+    width: 100%;
 }
 footer h3{
     color:white;
@@ -102,7 +104,8 @@ footer h3{
     text-align: center;
 }
 #menu-panel a{
-    background:  #254B52;
+    background:  #407A78;
+    border:1px solid #407A78;
     margin-bottom: 10px;
     margin-top: 10px;
     text-decoration: none;
@@ -113,7 +116,8 @@ footer h3{
     margin-right: 15%;
 }
 #menu-panel a:hover{
-    background: #7B7670;
+    background: white;
+    color:#407A78;
 }
 /*derecha*/
 .contenedor .derecha img{
@@ -137,39 +141,76 @@ footer h3{
     width: 50px;
 }
 .head{
-    background-color: #393939;
+    background-color: #407A78;
 }
 .head th{
-    color:#00ad5f;
+    color:white;
     padding:15px;
     text-transform: uppercase;
 }
 .body{
-    background-color: #222;
+    background-color: #254B52;
     text-align: center;
     padding: 5px;
-    color:gray;
+    color:white;
     text-transform: capitalize;
 }
 .body td{
     padding: 15px;
 }
 .body td:hover{
-    background-color: #3D3D3D;
+    background-color:  #407A78;
     transition: 0.8s;
 }
 .body a{
-    color:gray;
+    color:white;
 }
 table{
     border-radius: 1em;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    width:50%;
 }
 
 .table-button {
     display: block;
-    background-color: #22dd22;
-    color: black;
+    background-color: #407A78;
+    border:1px solid #407A78;
+    color:white;
     padding: 16px 8px;
     margin: 4px 0px;
     text-decoration: none;
+}
+.table-button:hover{
+    background: white;
+    color:#407A78 !important;
+
+
+}
+/*LOGIN*/
+
+input[type="submit"]{
+    background: #407A78;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    color: white;
+    font-size: 20px;
+    border:1px solid #407A78;
+}
+input[type="submit"]:hover{
+    background: white;
+    color: #407A78;
+}
+/*creacion tareas*/
+#crear-tarea-form{
+    margin-top:2%;
+}
+#crear-tarea input,#crear-tarea select{
+    margin-top:10px;
+    margin-bottom: 10px;
+}
+#Main_panel a[href="/panel"]{
+    color:#407A78;
 }

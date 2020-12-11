@@ -10,8 +10,8 @@
 			<h2>Asignación de Tareas</h2>
 		</div>
 		<div id="crear-tarea" align="center">
-			<table>
-				<tr>
+			<table cellspacing="0" cellpadding="0">
+				<tr class="head">
 					<th>Nombre</th>
 					<th>Fecha inicio</th>
 					<th>Fecha plazo</th>
@@ -20,7 +20,7 @@
 					<th>Acciones</th>
 				</tr>
 				{% for t in tareas %}
-				<tr>
+				<tr class="body">
 					<td>{{ t.nombre }}</td>
 					<td>{{ t.fecha_inicio|default_if_none:"Aún no ejecutada" }}</td>
 					<td>{{ t.fecha_plazo }}</td>
