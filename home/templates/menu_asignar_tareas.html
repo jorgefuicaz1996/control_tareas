@@ -12,7 +12,7 @@
 		<div id="crear-tarea" align="center">
 			<table>
 				<tr>
-					<th>Descripción tarea</th>
+					<th>Nombre</th>
 					<th>Fecha inicio</th>
 					<th>Fecha plazo</th>
 					<th>Estado</th>
@@ -21,8 +21,8 @@
 				</tr>
 				{% for t in tareas %}
 				<tr>
-					<td>{{ t.descripcion }}</td>
-					<td>{{ t.fecha_inicio }}</td>
+					<td>{{ t.nombre }}</td>
+					<td>{{ t.fecha_inicio|default_if_none:"Aún no ejecutada" }}</td>
 					<td>{{ t.fecha_plazo }}</td>
 					<td>{{ t.estado }}</td>
 					<td>{% for r in t.responsables.all %}{{ r }}<br>{% empty %}No hay responsable asignado{% endfor %}</td>

@@ -41,7 +41,7 @@ class CrearTareaView(LoginRequiredMixin, View):
 				descripcion = data.get('descripcion'),
 				fecha_inicio = data.get('fecha_inicio'),
 				fecha_plazo = data.get('fecha_plazo'),
-				estado = EstadoTarea.objects.get(descripcion = 'Creada'),
+				estado = EstadoTarea.objects.get(pk = 1),
 				funcion = data.get('funcion'))
 			return redirect('crear-tarea')
 		return render(request, self.template_name, self.context)
@@ -70,8 +70,8 @@ def asignar_responsable(request, tarea, responsable):
 	funcionario_obj = Funcionario.objects.get(pk = responsable)
 	tarea_obj = Tarea.objects.get(pk = tarea)
 	ResponsableTarea.objects.create(funcionario = funcionario_obj, tarea = tarea_obj)
-	if tarea_obj.estado != 'Asignada':
-		tarea_obj.estado = EstadoTarea.objects.get(descripcion = 'Asignada')
+	if tarea_obj.estado.pk != 2:
+		tarea_obj.estado = EstadoTarea.objects.get(pk = 2)
 		tarea_obj.save()
 	return redirect('lista-responsable', tarea)
 
@@ -103,6 +103,20 @@ class MisTareasView(LoginRequiredMixin, View):
 
 		self.context['tareas'] = arr_tareas
 		return render(request, self.template_name, self.context)
+
+def ejecutar_tarea(request, tarea):
+	tarea_obj = Tarea.objects.get(pk = tarea)
+	tarea_obj.fecha_inicio = datetime.now()
+	tarea_obj.estado = EstadoTarea.objects.get(pk = 3)
+	tarea_obj.save()
+	return redirect('mis-tareas')
+
+def terminar_tarea(request, tarea):
+	tarea_obj = Tarea.objects.get(pk = tarea)
+	tarea_obj.fecha_termino = datetime.now()
+	tarea_obj.estado = EstadoTarea.objects.get(pk = 6)
+	tarea_obj.save()
+	return redirect('mis-tareas')
 
 class ReportarProblemaView(LoginRequiredMixin, View):
 	template_name = 'report-problema.html'

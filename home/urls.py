@@ -10,4 +10,6 @@ urlpatterns = [
 	path('asignar-tarea/<int:tarea>/<int:responsable>', views.asignar_responsable, name = 'asignar-responsable'),
 	path('mis-tareas', views.MisTareasView.as_view(), name = 'mis-tareas'),
 	path('mis-tareas/reportar-problema/<int:tarea>', views.ReportarProblemaView.as_view(), name = 'reportar-problema'),
+	path('mis-tareas/ejecutar/<int:tarea>', views.ejecutar_tarea, name = 'ejecutar-tarea'),
+	path('mis-tareas/terminar/<int:tarea>', views.terminar_tarea, name = 'terminar-tarea'),
 ]
