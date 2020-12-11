@@ -49,6 +49,7 @@ class ModificarTareaForm(forms.Form):
 			empresa = Empresa.objects.get(pk = int(kwargs.pop('empresa_pk')))
 			super().__init__(*args, **kwargs)
 			self.fields['funcion'].queryset = Funcion.objects.filter(depto__empresa = empresa)
+			self.fields['funcion'].initial = kwargs['initial']['funcion']
 		else:
 			super().__init__(*args, **kwargs)
 

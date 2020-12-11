@@ -83,7 +83,15 @@ class ModificarTareaView(LoginRequiredMixin, View):
 	context = {'title': 'Modificar tarea'}
 
 	def get(self, request, tarea):
-		self.context['form'] = self.form()
+		funcionario_obj = Funcionario.objects.get(usuario = request.user)
+		tarea_obj = Tarea.objects.get(pk = tarea)
+		initial_values = {
+			'nombre': tarea_obj.nombre,
+			'descripcion': tarea_obj.descripcion,
+			'fecha_plazo': tarea_obj.fecha_plazo,
+			'funcion': tarea_obj.funcion
+		}
+		self.context['form'] = self.form(initial = initial_values, empresa_pk = funcionario_obj.empresa.pk)
 		return render(request, self.template_name, self.context)
 
 	def post(self, request, tarea):
