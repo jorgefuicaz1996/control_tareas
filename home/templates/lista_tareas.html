@@ -13,12 +13,18 @@
 			<table cellspacing="0" cellpadding="0">
 				<tr class="head">
 					<th>Tarea</th>
+					<th>Función asociada</th>
+					<th>Fecha Inicio</th>
+					<th>Fecha Plazo</th>
 					<th>Estado</th>
 					<th>Acciones</th>
 				</tr>
 				{% for t in tareas %}
 				<tr class="body">
 					<td>{{ t.nombre }}</td>
+					<td>{{ t.funcion }}</td>
+					<td>{{ t.fecha_inicio|default_if_none:"Aún no ejecutada" }}</td>
+					<td>{{ t.fecha_plazo }}</td>
 					<td>{{ t.estado }}</td>
 					<td><a href="{% url 'modificar-tarea' t.pk %}">Modificar</a></td>
 				</tr>

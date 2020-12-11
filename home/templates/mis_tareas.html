@@ -13,6 +13,7 @@
 			<table cellspacing="0" cellpadding="0">
 				<tr class="head">
 					<th>Nombre tarea</th>
+					<th>Función asociada</th>
 					<th>Fecha inicio</th>
 					<th>Fecha plazo</th>
 					<th>Días restantes</th>
@@ -24,6 +25,7 @@
 				{% with tarea=item.tarea %}
 				<tr class="body">
 					<td>{{ tarea.nombre }}</td>
+					<td>{{ tarea.funcion }}</td>
 					<td>{{ tarea.fecha_inicio|default_if_none:"Aún no ejecutada" }}</td>
 					<td>{{ tarea.fecha_plazo }}</td>
 					<td>{{ item.dias }}</td>
