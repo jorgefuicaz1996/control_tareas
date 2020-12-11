@@ -1,0 +1,28 @@
+{% extends 'template.html' %}
+{% load static %}
+{% block imports %}
+
+{% endblock %}
+{% block content %}
+<div id="panel">
+	<div id="Main_panel">
+		<div class="Titulo">
+			<h2>Modificar tarea</h2>
+		</div>
+		<div id="crear-tarea" align="center">
+			<form id="crear-tarea-form" method="POST">
+				{% csrf_token %}
+				<table>
+					{% for field in form %}<tr>
+						<th>{{ field.label_tag }}</th>
+						<td>{{ field }}</td>
+						<td>{{ field.errors }}</td>
+					</tr>{% endfor %}
+				</table>
+				<input type="submit" value="Modificar tarea">
+			</form>
+		</div>
+		<a href="{% url 'lista-tareas' %}">Volver</a>
+	</div>
+</div>
+{% endblock %}
