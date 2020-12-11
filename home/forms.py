@@ -12,9 +12,6 @@ class CrearTareaForm(forms.Form):
 		max_length = 100,
 		widget = forms.Textarea())
 
-	fecha_inicio = forms.DateField(
-		widget = forms.SelectDateWidget(years = range(datetime.now().year, datetime.now().year + 10)))
-
 	fecha_plazo = forms.DateField(
 		widget = forms.SelectDateWidget(years = range(datetime.now().year, datetime.now().year + 10)))
 
