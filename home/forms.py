@@ -1,6 +1,6 @@
 from django import forms
 from datetime import datetime
-from api.models import Funcion, Tarea
+from api.models import Funcion, Empresa, Tarea
 
 class CrearTareaForm(forms.Form):
 	nombre = forms.CharField(
@@ -18,6 +18,14 @@ class CrearTareaForm(forms.Form):
 	funcion = forms.ModelChoiceField(
 		label = 'Función asociada',
 		queryset = Funcion.objects.all())
+
+	def __init__(self, *args, **kwargs):
+		if 'empresa_pk' in kwargs:
+			empresa = Empresa.objects.get(pk = int(kwargs.pop('empresa_pk')))
+			super().__init__(*args, **kwargs)
+			self.fields['funcion'].queryset = Funcion.objects.filter(depto__empresa = empresa)
+		else:
+			super().__init__(*args, **kwargs)
 
 class ReportarProblemaForm(forms.Form):
 	descripcion = forms.CharField(

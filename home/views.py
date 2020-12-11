@@ -29,7 +29,8 @@ class CrearTareaView(LoginRequiredMixin, View):
 	context = {'title': 'Inicio de sesión', 'fail': False}
 
 	def get(self, request):
-		self.context['form'] = self.form()
+		funcionario_obj = Funcionario.objects.get(usuario = request.user)
+		self.context['form'] = self.form(empresa_pk = funcionario_obj.empresa.pk)
 		return render(request, self.template_name, self.context)
 
 	def post(self, request):
@@ -39,7 +40,6 @@ class CrearTareaView(LoginRequiredMixin, View):
 			Tarea.objects.create(
 				nombre = data.get('nombre'),
 				descripcion = data.get('descripcion'),
-				fecha_inicio = data.get('fecha_inicio'),
 				fecha_plazo = data.get('fecha_plazo'),
 				estado = EstadoTarea.objects.get(pk = 1),
 				funcion = data.get('funcion'))
@@ -51,7 +51,8 @@ class MenuAsignacionTareasView(LoginRequiredMixin, View):
 	context = {'title': 'Asignación de Tareas'}
 
 	def get(self, request):
-		tareas = Tarea.objects.all()
+		funcionario_obj = Funcionario.objects.get(usuario = request.user)
+		tareas = Tarea.objects.filter(estado__pk__lt = 6, funcion__depto__empresa = funcionario_obj.empresa)
 		self.context['tareas'] = tareas
 		return render(request, self.template_name, self.context)
 
@@ -60,9 +61,10 @@ class ListaResponsableView(LoginRequiredMixin, View):
 	context = {'title': 'Asignar Responsable'}
 
 	def get(self, request, tarea):
-		tarea = Tarea.objects.get(pk = tarea)
-		funcionarios = Funcionario.objects.exclude(pk__in = ResponsableTarea.objects.filter(tarea = tarea).values('funcionario'))
-		self.context['tarea'] = tarea
+		funcionario_obj = Funcionario.objects.get(usuario = request.user)
+		tarea_obj = Tarea.objects.get(pk = tarea)
+		funcionarios = Funcionario.objects.filter(empresa = funcionario_obj.empresa).exclude(pk__in = ResponsableTarea.objects.filter(tarea = tarea).values('funcionario'))
+		self.context['tarea'] = tarea_obj
 		self.context['funcionarios'] = funcionarios
 		return render(request, self.template_name, self.context)
 
@@ -70,7 +72,7 @@ def asignar_responsable(request, tarea, responsable):
 	funcionario_obj = Funcionario.objects.get(pk = responsable)
 	tarea_obj = Tarea.objects.get(pk = tarea)
 	ResponsableTarea.objects.create(funcionario = funcionario_obj, tarea = tarea_obj)
-	if tarea_obj.estado.pk != 2:
+	if tarea_obj.estado.pk == 1:
 		tarea_obj.estado = EstadoTarea.objects.get(pk = 2)
 		tarea_obj.save()
 	return redirect('lista-responsable', tarea)
@@ -81,8 +83,8 @@ class MisTareasView(LoginRequiredMixin, View):
 
 	def get(self, request):
 		hoy = datetime.now().date()
-		funcionario = Funcionario.objects.get(email = request.user.username)
-		tareas = Tarea.objects.filter(responsables = funcionario)
+		funcionario_obj = Funcionario.objects.get(usuario = request.user)
+		tareas = Tarea.objects.filter(responsables = funcionario_obj)
 		arr_tareas = {}
 		for t in tareas:
 			# Determina la diferencia de días en que se encuentra la tarea frente al plazo
