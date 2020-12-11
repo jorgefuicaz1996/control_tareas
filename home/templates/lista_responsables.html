@@ -11,13 +11,13 @@
 			<h3>{{ tarea.nombre }}</h3>
 		</div>
 		<div id="crear-tarea" align="center">
-			<table>
-				<tr>
+			<table cellspacing="0" cellpadding="0">
+				<tr class="head">
 					<th>Funcionario</th>
 					<th>Acciones</th>
 				</tr>
 				{% for f in funcionarios %}
-				<tr>
+				<tr class="body">
 					<td>{{ f }}</td>
 					<td><a href="{% url 'asignar-responsable' tarea.id_tarea f.id_funcionario %}">Asignar</a></td>
 				</tr>
