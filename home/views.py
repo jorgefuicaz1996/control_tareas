@@ -62,8 +62,8 @@ class ListaResponsableView(LoginRequiredMixin, View):
 	def get(self, request, tarea):
 		funcionario_obj = Funcionario.objects.get(usuario = request.user)
 		tarea_obj = Tarea.objects.get(pk = tarea)
-		asignados = Funcionario.objects.filter(empresa = funcionario_obj.empresa).filter(pk__in = ResponsableTarea.objects.filter(tarea = tarea).values('funcionario'))
-		no_asignados = Funcionario.objects.filter(empresa = funcionario_obj.empresa).exclude(pk__in = ResponsableTarea.objects.filter(tarea = tarea).values('funcionario'))
+		asignados = Funcionario.objects.filter(rol = RolFuncionario.objects.get(nombre = 'Funcionario'), empresa = funcionario_obj.empresa).filter(pk__in = ResponsableTarea.objects.filter(tarea = tarea).values('funcionario'))
+		no_asignados = Funcionario.objects.filter(rol = RolFuncionario.objects.get(nombre = 'Funcionario'), empresa = funcionario_obj.empresa).exclude(pk__in = ResponsableTarea.objects.filter(tarea = tarea).values('funcionario'))
 		funcionarios = {}
 		for f in no_asignados:
 			funcionarios[str(f.pk)] = {'funcionario': f, 'asignado': False}
