@@ -32,3 +32,10 @@ class ReportarProblemaForm(forms.Form):
 		label = 'Descripción',
 		max_length = 500,
 		widget = forms.Textarea())
+
+class DevolverTareaForm(forms.Form):
+	motivo = forms.CharField(
+		max_length = 500,
+		widget = forms.Textarea())
+
+	documento = forms.FileField(widget = forms.ClearableFileInput())

@@ -68,12 +68,19 @@ class ListaResponsableView(LoginRequiredMixin, View):
 		return render(request, self.template_name, self.context)
 
 def asignar_responsable(request, tarea, responsable):
+	asignador = Funcionario.objects.get(usuario = request.user)
 	funcionario_obj = Funcionario.objects.get(pk = responsable)
 	tarea_obj = Tarea.objects.get(pk = tarea)
-	ResponsableTarea.objects.create(funcionario = funcionario_obj, tarea = tarea_obj)
+	ResponsableTarea.objects.create(
+		funcionario = funcionario_obj,
+		tarea = tarea_obj,
+		asignado_por = asignador.pk)
 	if tarea_obj.estado.pk == 1:
 		tarea_obj.estado = EstadoTarea.objects.get(pk = 2)
 		tarea_obj.save()
+	Notificacion.objects.create(
+		contenido = 'Te han asignado la tarea ' + tarea_obj.nombre,
+		funcionario = funcionario_obj)
 	return redirect('lista-responsable', tarea)
 
 class MisTareasView(LoginRequiredMixin, View):
@@ -134,10 +141,43 @@ class ReportarProblemaView(LoginRequiredMixin, View):
 			data = form.cleaned_data
 			funcionario_obj = Funcionario.objects.get(usuario = request.user)
 			tarea_obj = Tarea.objects.get(pk = tarea)
+			asignacion = ResponsableTarea(tarea = tarea_obj, funcionario = funcionario_obj)
+			asignador = Funcionario.objects.get(pk = asignacion.asignado_por)
 			Problema.objects.create(
 				descripcion = data.get('descripcion'),
 				estado = 'INGRESADO',
 				funcionario = funcionario_obj,
 				tarea = tarea_obj)
+			Notificacion.objects.create(
+				contenido = 'El funcionario ' + funcionario_obj + ' ha ingresado un problema para la tarea ' + tarea_obj,
+				funcionario = asignador)
+			return redirect('mis-tareas')
+		return render(request, self.template_name, self.context)
+
+class DevolverTareaView(LoginRequiredMixin, View):
+	template_name = 'devolver_tarea.html'
+	form = DevolverTareaForm
+	context = {'title': 'Devolver tarea'}
+
+	def get(self, request, tarea):
+		self.context['form'] = self.form()
+		return render(request, self.template_name, self.context)
+
+	def post(self, request, tarea):
+		form = self.form(request.POST, request.FILES or None)
+		if form.is_valid():
+			data = form.cleaned_data
+			funcionario_obj = Funcionario.objects.get(usuario = request.user)
+			tarea_obj = Tarea.objects.get(pk = tarea)
+			asignacion = ResponsableTarea.objects.get(funcionario = funcionario_obj, tarea = tarea_obj)
+			asignador = Funcionario.objects.get(pk = asignacion.asignado_por)
+			Justificativo.objects.create(
+				motivo = data.get('motivo'),
+				documento = data.get('documento'),
+				funcionario = funcionario_obj,
+				tarea = tarea_obj)
+			Notificacion.objects.create(
+				contenido = 'El funcionario ' + funcionario_obj + 'ha ingresado una solicitud de devolución para la tarea ' + tarea_obj,
+				funcionario = asignador)
 			return redirect('mis-tareas')
 		return render(request, self.template_name, self.context)

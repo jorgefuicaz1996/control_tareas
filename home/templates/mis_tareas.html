@@ -40,7 +40,7 @@
 					<td>
 						{% if tarea.estado.pk == 1 or tarea.estado.pk == 2 %}
 						<a class="table-button" href="{% url 'ejecutar-tarea' tarea.pk %}">Ejecutar</a>
-						<a class="table-button" href="#">Devolver</a>
+						<a class="table-button" href="{% url 'devolver-tarea' tarea.pk %}">Devolver</a>
 						{% elif tarea.estado.pk != 6 %}
 						<a class="table-button" href="{% url 'terminar-tarea' tarea.pk %}">Terminar</a>
 						<a class="table-button" href="{% url 'reportar-problema' tarea.pk %}">Reportar problema</a>
