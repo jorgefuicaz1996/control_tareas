@@ -3,7 +3,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 from datetime import datetime, timedelta
 from .forms import *
-from django.db.models import Q
 from api.models import *
 
 # Create your views here.
