@@ -16,11 +16,19 @@
 					<th>Funcionario</th>
 					<th>Acciones</th>
 				</tr>
-				{% for f in funcionarios %}
+				{% for item in funcionarios.values %}
+				{% with f=item.funcionario %}
 				<tr class="body">
 					<td>{{ f }}</td>
-					<td><a href="{% url 'asignar-responsable' tarea.id_tarea f.id_funcionario %}">Asignar</a></td>
+					<td>
+						{% if item.asignado %}
+						<a href="{% url 'quitar-responsable' tarea.id_tarea f.id_funcionario %}">Quitar</a>
+						{% else %}
+						<a href="{% url 'asignar-responsable' tarea.id_tarea f.id_funcionario %}">Asignar</a>
+						{% endif %}
+					</td>
 				</tr>
+				{% endwith %}
 				{% empty %}
 				<tr>
 					<td colspan="5">No hay funcionarios disponibles por asignar</td>

@@ -62,7 +62,13 @@ class ListaResponsableView(LoginRequiredMixin, View):
 	def get(self, request, tarea):
 		funcionario_obj = Funcionario.objects.get(usuario = request.user)
 		tarea_obj = Tarea.objects.get(pk = tarea)
-		funcionarios = Funcionario.objects.filter(empresa = funcionario_obj.empresa).exclude(pk__in = ResponsableTarea.objects.filter(tarea = tarea).values('funcionario'))
+		asignados = Funcionario.objects.filter(empresa = funcionario_obj.empresa).filter(pk__in = ResponsableTarea.objects.filter(tarea = tarea).values('funcionario'))
+		no_asignados = Funcionario.objects.filter(empresa = funcionario_obj.empresa).exclude(pk__in = ResponsableTarea.objects.filter(tarea = tarea).values('funcionario'))
+		funcionarios = {}
+		for f in no_asignados:
+			funcionarios[str(f.pk)] = {'funcionario': f, 'asignado': False}
+		for f in asignados:
+			funcionarios[str(f.pk)] = {'funcionario': f, 'asignado': True}
 		self.context['tarea'] = tarea_obj
 		self.context['funcionarios'] = funcionarios
 		return render(request, self.template_name, self.context)
@@ -122,6 +128,12 @@ def asignar_responsable(request, tarea, responsable):
 	Notificacion.objects.create(
 		contenido = 'Te han asignado la tarea ' + tarea_obj.nombre,
 		funcionario = funcionario_obj)
+	return redirect('lista-responsable', tarea)
+
+def quitar_responsable(request, tarea, responsable):
+	funcionario_obj = Funcionario.objects.get(pk = responsable)
+	tarea_obj = Tarea.objects.get(pk = tarea)
+	ResponsableTarea.objects.get(funcionario = funcionario_obj, tarea = tarea_obj).delete()
 	return redirect('lista-responsable', tarea)
 
 class MisTareasView(LoginRequiredMixin, View):
