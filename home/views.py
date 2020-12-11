@@ -67,6 +67,39 @@ class ListaResponsableView(LoginRequiredMixin, View):
 		self.context['funcionarios'] = funcionarios
 		return render(request, self.template_name, self.context)
 
+class ListaTareasView(LoginRequiredMixin, View):
+	template_name = 'lista_tareas.html'
+	context = {'title': 'Lista de tareas para modificar'}
+
+	def get(self, request):
+		funcionario_obj = Funcionario.objects.get(usuario = request.user)
+		tareas = Tarea.objects.filter(funcion__depto__empresa = funcionario_obj.empresa)
+		self.context['tareas'] = tareas
+		return render(request, self.template_name, self.context)
+
+class ModificarTareaView(LoginRequiredMixin, View):
+	template_name = 'modificar_tarea.html'
+	form = ModificarTareaForm
+	context = {'title': 'Modificar tarea'}
+
+	def get(self, request, tarea):
+		self.context['form'] = self.form()
+		return render(request, self.template_name, self.context)
+
+	def post(self, request, tarea):
+		form = self.form(request.POST)
+		if form.is_valid():
+			data = form.cleaned_data
+			tarea_obj = Tarea.objects.get(pk = tarea)
+			tarea_obj.nombre = data.get('nombre'),
+			tarea_obj.descripcion = data.get('descripcion'),
+			tarea_obj.fecha_plazo = data.get('fecha_plazo'),
+			tarea_obj.estado = EstadoTarea.objects.get(pk = 1),
+			tarea_obj.funcion = data.get('funcion')
+			tarea_obj.save()
+			return redirect('modificar-tarea')
+		return render(request, self.template_name, self.context)
+
 def asignar_responsable(request, tarea, responsable):
 	asignador = Funcionario.objects.get(usuario = request.user)
 	funcionario_obj = Funcionario.objects.get(pk = responsable)
