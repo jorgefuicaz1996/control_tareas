@@ -138,12 +138,12 @@ if settings.DB_ORACLE:
 			managed = False
 
 		def __str__(self):
-			return self.descripcion
+			return self.nombre
 
 	class ResponsableTarea(models.Model):
 		funcionario = models.ForeignKey(Funcionario, on_delete = models.CASCADE, db_column = 'id_funcionario')
 		tarea = models.ForeignKey(Tarea, on_delete = models.CASCADE, db_column = 'id_tarea')
-		justificativo = models.CharField(max_length = 50, null = True, blank = True)
+		asignado_por = models.IntegerField()
 
 		class Meta:
 			db_table = 'responsable_tarea'
@@ -162,6 +162,28 @@ if settings.DB_ORACLE:
 
 		class Meta:
 			db_table = 'problema'
+			managed = False
+
+	class Justificativo(models.Model):
+		id_justificativo = models.AutoField(primary_key = True)
+		motivo = models.CharField(max_length = 500)
+		documento = models.FileField(upload_to = 'documentos', null = True, blank = True)
+		funcionario = models.ForeignKey(Funcionario, on_delete = models.CASCADE, db_column = 'id_funcionario')
+		tarea = models.ForeignKey(Tarea, on_delete = models.CASCADE, db_column = 'id_tarea')
+
+		class Meta:
+			db_table = 'justificativo'
+			managed = False
+
+	class Notificacion(models.Model):
+		id_notificacion = models.AutoField(primary_key = True)
+		contenido = models.CharField(max_length = 1000)
+		fecha_aviso = models.DateTimeField(auto_now_add = True)
+		visto = models.BooleanField(default = False)
+		funcionario = models.ForeignKey(Funcionario, on_delete = models.CASCADE, db_column = 'id_funcionario')
+
+		class Meta:
+			db_table = 'notificacion'
 			managed = False
 else:
 	class RolDepto(models.Model):
@@ -288,12 +310,12 @@ else:
 			db_table = 'tarea'
 
 		def __str__(self):
-			return self.descripcion
+			return self.nombre
 
 	class ResponsableTarea(models.Model):
 		funcionario = models.ForeignKey(Funcionario, on_delete = models.CASCADE, db_column = 'id_funcionario')
 		tarea = models.ForeignKey(Tarea, on_delete = models.CASCADE, db_column = 'id_tarea')
-		justificativo = models.CharField(max_length = 50, null = True, blank = True)
+		asignado_por = models.IntegerField()
 
 		class Meta:
 			db_table = 'responsable_tarea'
@@ -311,3 +333,23 @@ else:
 
 		class Meta:
 			db_table = 'problema'
+
+	class Justificativo(models.Model):
+		id_justificativo = models.AutoField(primary_key = True)
+		motivo = models.CharField(max_length = 500)
+		documento = models.FileField(upload_to = 'documentos', null = True, blank = True)
+		funcionario = models.ForeignKey(Funcionario, on_delete = models.CASCADE, db_column = 'id_funcionario')
+		tarea = models.ForeignKey(Tarea, on_delete = models.CASCADE, db_column = 'id_tarea')
+
+		class Meta:
+			db_table = 'justificativo'
+
+	class Notificacion(models.Model):
+		id_notificacion = models.AutoField(primary_key = True)
+		contenido = models.CharField(max_length = 1000)
+		fecha_aviso = models.DateTimeField(auto_now_add = True)
+		visto = models.BooleanField(default = False)
+		funcionario = models.ForeignKey(Funcionario, on_delete = models.CASCADE, db_column = 'id_funcionario')
+
+		class Meta:
+			db_table = 'notificacion'
